@@ -1,5 +1,6 @@
+
 {% extends "base.html" %}
-{% block title %}Index{% endblock %}
+{% block title %}Welcome{% endblock %}
 {% block head %}
     {{ super() }}
     <style type="text/css">
@@ -7,9 +8,11 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h1>Index I should see this change with a page refresh</h1>
+    <h1>Welcome</h1>
     <p class="important">
-      Welcome to my awesome homepage.
-        <img src="{{ url_for('static', filename='images/sample.jpeg') }}">
+      This is Lou's homepage.</p>
+    <p>
+        <img src="{{ url_for('static', filename='images/calc-pirate.jpg') }}">
     </p>
+
 {% endblock %}
