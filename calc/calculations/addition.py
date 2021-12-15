@@ -1,11 +1,10 @@
-"""Addition Class"""
+"""This is the addition calculation that inherits values from the calculations class"""
+#This is called a namespace it is like files & folders.
+#It looks like a folder & file path but it is a like a virtual representation
 from calc.calculations.calculation import Calculation
-
+#This is how you extend the Addition class with the Calculation
 class Addition(Calculation):
-    """ calculation addition class"""
+    """The addition class has one method to get the result of the calculation"""
     def get_result(self):
-        """get the addition results"""
-        sum_of_values = 0.0
-        for value in self.values:
-            sum_of_values = value + sum_of_values
-        return sum_of_values
+        """Get the addition result"""
+        return self.value_a + self.value_b

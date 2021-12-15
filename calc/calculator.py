@@ -1,40 +1,63 @@
-""" This is the increment function"""
-from calc.history.calculations import Calculations
+"""This class creates a calculator"""
+from calc.calculations.addition import Addition
+from calc.calculations.subtraction import Subtraction
+from calc.calculations.multiplication import Multiplication
+from calc.calculations.division import Division
 
-#the calculator class just contains the methods to calculate
 class Calculator:
-    """ This is the Calculator class"""
-    #the calculator class just calls methods on Calculations class
+    """This is the Calculator class"""
+    history = []
     @staticmethod
-    def get_last_result_value():
-        """ This is the gets the result of the calculation"""
-        # I made this method so that I don't have more than one action per function
-        return Calculations.get_last_calculation_result_value()
+    def get_result_of_first_calculation_added_to_history():
+        """Get first calculation"""
+        return Calculator.history[0].get_result()
+
     @staticmethod
-    #tuple allows me to pass in as many values as a I want
-    def addition(tuple_values: tuple):
-        """ adds list of numbers"""
-        Calculations.add_addition_calculation_to_history(tuple_values)
+    def clear_history():
+        """Clear history"""
+        Calculator.history.clear()
         return True
+
     @staticmethod
-    def subtraction(tuple_values: tuple):
-        """ subtract a list of numbers from result"""
-        Calculations.add_subtraction_calculation_to_history(tuple_values)
+    def history_count():
+        """Get history count"""
+        return len(Calculator.history)
+
+    @staticmethod
+    def add_calculation_to_history(calculation):
+        """Add calculation to history"""
+        Calculator.history.append(calculation)
         return True
+
     @staticmethod
-    def multiplication(tuple_values: tuple):
-        """ multiplication number from result"""
-        Calculations.add_multiplication_calculation_to_history(tuple_values)
-        return True
+    def get_result_of_last_calculation_added_to_history():
+        """Get last calculation"""
+        return Calculator.history[-1].get_result()
+
     @staticmethod
-    def getHistory():
-        """ Get history """
-        return Calculations.history
+    def add_number(value_a, value_b):
+        """Adds number to result"""
+        addition = Addition.create(value_a, value_b)
+        Calculator.add_calculation_to_history(addition)
+        return Calculator.get_result_of_last_calculation_added_to_history()
+
     @staticmethod
-    def getHistoryFromCSV():
-        """ Get history """
-        return Calculations.readHistoryFromCSV()
+    def subtract_number(value_a, value_b):
+        """"Subtract numbers and pass result"""
+        subtraction = Subtraction.create(value_a, value_b)
+        Calculator.add_calculation_to_history(subtraction)
+        return Calculator.get_result_of_last_calculation_added_to_history()
+
     @staticmethod
-    def writeHistoryToCSV():
-        """ Get history """
-        return Calculations.writeHistoryToCSV()
+    def multiply_numbers(value_a, value_b):
+        """Multiply numbers and pass result"""
+        multiplication = Multiplication.create(value_a, value_b)
+        Calculator.add_calculation_to_history(multiplication)
+        return Calculator.get_result_of_last_calculation_added_to_history()
+
+    @staticmethod
+    def divide_numbers(value_a, value_b):
+        """Divide numbers and pass result"""
+        division = Division.create(value_a, value_b)
+        Calculator.add_calculation_to_history(division)
+        return Calculator.get_result_of_last_calculation_added_to_history()

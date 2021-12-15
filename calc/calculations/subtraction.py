@@ -1,14 +1,12 @@
-"""Subtraction Class"""
-import pprint
+"""This is the subtraction calculation that inherits the values from the calculations class"""
+#This is called a namespace it is like files & folders.
+#It looks like a folder & file path but it is a like a virtual representation
 
 from calc.calculations.calculation import Calculation
 
+#This is how you extend the Addition class with the Calculation
 class Subtraction(Calculation):
-    """subtraction calculation object"""
+    """The subtraction class has one method to get the result of the calculation"""
     def get_result(self):
-        """get the subtraction results"""
-        difference_of_values = 0.0
-        for value in self.values:
-            difference_of_values =   difference_of_values - value
-            pprint.pprint(value)
-        return difference_of_values
+        """Get the subtraction result"""
+        return self.value_a - self.value_b

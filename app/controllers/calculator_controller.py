@@ -1,7 +1,9 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
 from app.controllers.controller import ControllerBase
 from calc.calculator import Calculator
 from flask import render_template, request, flash, redirect, url_for, session
-
 
 class CalculatorController(ControllerBase):
     @staticmethod
@@ -33,25 +35,6 @@ class CalculatorController(ControllerBase):
     def get():
         return render_template('calculator.html')
 
-
-    """
-    The easy calculator solution
-    1.  fix your calculator to read and write calculations to the csv
-    2.  fix the controller to read the the csv to history first
-    3.  Fix the controller to write the history to csv after you add the calculation to history
-    4.  Make a method on the calculator to return the history in the format you want to print in the template
-    
-    Optional
-       Fix it so that you store the type of calculation and perform the calulation at runtime, 
-       so you don't store the raw result
-       
-       IF you want to be fancy you can change the delimeter for the file to semicolon and write your tuple of value to the file
-       
-       Values, Operation
-       1,2,3,4; Addition
-       1,2,3,4; Addition
-    
-    """
 
 
 
