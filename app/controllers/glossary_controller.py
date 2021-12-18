@@ -8,9 +8,9 @@
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
 from app.controllers.controller import ControllerBase
-from flask import Flask, render_template
+from flask import render_template
 
-class IndexController(ControllerBase):
+class GlossaryController(ControllerBase):
     @staticmethod
     def get():
-        return render_template('home.html')
+        return render_template('glossary.html')

@@ -6,7 +6,10 @@ import pathlib
 import os
 import pandas as pd
 import time
-
+from tests.addition_test import Addition
+from tests.subtraction_test import Subtraction
+from tests.mulitplication_test import Multiplication
+from tests.division_test import Division
 from calc.calculator import Calculator
 
 cwd = os.getcwd()  #Get folder
