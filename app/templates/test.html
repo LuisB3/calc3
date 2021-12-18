@@ -1,0 +1,29 @@
+27 lines (24 sloc)  1000 Bytes
+   
+{% extends "base.html" %}
+{% set active_page = "index" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="home-image">
+        <div class="body-content">
+            <h1 class="pd-bottom pd-bottom-10 t-align-center h1-index">Welcome to my project hub for IS601</h1>
+            <div class="page-section pd-bottom-10" style="text-align: center">
+
+                <a href="/pythonHome" title="Object Oriented programming in Python" style="margin: 0 auto"><img
+                        src="{{ url_for('static', filename='images/python2.png') }}" alt="Python programming image"
+                        class="grid-img width-350">
+                </a>
+
+            </div>
+        </div>
+        <div class="divSection">
+            <p class="divBottomFontStyle-index pd-top-10">
+                <span><b>Click on</b></span> your choice of topic of interest to know more!!
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
