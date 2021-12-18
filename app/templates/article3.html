@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Principles of OOP</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="font-family: Impact; letter-spacing: 5px;">Principles of OOP</h2>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button">
+                        Learn More
+                    </a>
+                    <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+                        <a class="dropdown-item" href="article1.html">Pylint Tips & Tricks</a>
+                        <a class="dropdown-item" href="article2.html">AAA Tutorial</a>
+                        <a class="dropdown-item" href="article3.html">Principals of OOPs</a>
+                        <a class="dropdown-item" href="article4.html">Separation of Concerns</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="glossary.html">OOP Glossary <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <p>
+    <ul>
+    <h3>Four Basics of Object-Oriented Programming</h3> Object-oriented programming has four basic concepts:
+        encapsulation, abstraction, inheritance, and polymorphism. Even if these concepts seem incredibly complex, understanding the general
+        framework of how they work will help you understand the basics of an OOP computer program. Below, we outline these four basic principles:</li>
+    <li><span><b>Encapsulation</b></span>
+    <li><span><b>Abstraction</b></span>
+    <li><span><b>Inheritance</b></span>
+    <li><span><b>Polymorphism</b></span>
+    </ul>
+    </p>
+    <p>
+    <img src="../static/images/oop.jpg" style="align-content: center; height: 300px; width: 400px">
+    </p>
+    <li><span><b>Encapsulation</b></span> - Using OOP in Python, we can restrict access to methods and variables. This prevents data from direct modification
+        which is called encapsulation. In Python, we denote private attributes using underscore as the prefix i.e. single _ or double __. As you know, we have built in a history
+        attribute for our Calculator. This allows us to keep track of all the calculations we have done. We can pull out the most recent or the first calculation in the history,
+        clear the history to start over, and more. However, take a look at our Calculator class and see if you notice anything.</li>
+    <div style="background-color: #cfc ; padding: 10px; border: 1px solid green;">
+        <code style="display:block; white-space:pre-wrap">
+            """This is our calculation base class & abstract class"""
+            class Calculation: # pylint: disable=too-few-public-methods
+            """constructor & it is the 1st function called when an object of the class is instantiated"""
+            def __init__(self, value_a, value_b): # pylint: disable=too-few-public-methods
+            """class factory method"""
+            self.value_a = value_a
+            self.value_b = value_b
+            @classmethod
+            def create(cls, value_a, value_b):
+            """class method"""
+            return cls(value_a, value_b)
+        </code></div>
+        In the above program, we defined a Calculation class. We used __init__() method to store values.
+    <p>
+    </p>
+    <li><span><b>Abstraction</b></span> - Often, it’s easier to reason and design a program when you can separate the interface of a class from its implementation,
+        and focus on the interface. This process is called “abstraction” in OOP, because we are abstracting away the gory implementation details of a class and
+        only presenting a clean and easy-to-use interface via the class’ member functions. Carefully used, abstraction helps isolate the impact of changes made to
+        the code, so that if something goes wrong, the change will only affect the implementation details of a class and not the outside code.
+        My Calculator program contains many examples of Abstraction. For example, the Calculator class is something the end-user interacts with directly.</li>
+    <div style="background-color: #cfc ; padding: 10px; border: 1px solid green;">
+        <code style="display:block; white-space:pre-wrap">
+            "" This is the increment function"""
+            #1st import he addition namespace
+            from calc.additon import Addition
+            from calc.subtraction import Subtraction
+            from calc.multiplication import Multiplication
+            from calc.division import Division
+
+            class Calculator:
+            """ This is the Calculator class"""
+            history = []
+            @staticmethod
+            def get_results_of_first_calculation_added_to_history():
+            """ This is the get first result class"""
+            return Calculator.history[0].get_result()
+
+            @staticmethod
+            def get_history():
+            """ This is the get history class"""
+            return Calculator.history
+
+            @staticmethod
+            def clear_history():
+            """ This is the clear result class"""
+            Calculator.history.clear()
+            return True
+
+            @staticmethod
+            def history_count():
+            """ This is the history count class"""
+            return len(Calculator.history)
+
+            @staticmethod
+            def add_calculation_to_history(calculation):
+            """ This is the calculation history class"""
+            Calculator.history.append(calculation)
+            return True
+
+            @staticmethod
+            def get_results_of_last_calculation_added_to_history():
+            """-1 gets last item added to list"""
+            return Calculator.history[-1].get_result()
+
+            @staticmethod
+            #this is an example of a calling method
+            def add_number(value_a, value_b):
+            """ adds number to result"""
+            #create an addition object using the factory we created on the calculation class
+            addition = Addition.create(value_a, value_b)
+            Calculator.add_calculation_to_history(addition)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+
+            @staticmethod
+            #this is an example of a calling method
+            def subtract_number(value_a, value_b):
+            """ subtract number from result"""
+            # create a subtraction object using the factory we created on the calculation class
+            subtraction = Subtraction.create(value_a, value_b)
+            Calculator.add_calculation_to_history(subtraction)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+
+            @staticmethod
+            #this is an example of a calling method
+            def multiply_numbers(value_a, value_b):
+            """ multiply two numbers and store the result"""
+            # create a multiplication object using the factory we created on the calculation class
+            multiplication = Multiplication.create(value_a, value_b)
+            Calculator.add_calculation_to_history(multiplication)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+
+            @staticmethod
+            #this is an example of a calling method
+            def divide_numbers(value_a, value_b):
+            """ division two numbers and store the result"""
+            # create a division object using the factory we created on the calculation class
+            division = Division.create(value_a, value_b)
+            Calculator.add_calculation_to_history(division)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+        </code></div>
+    <p>
+    </p>
+        In the Calculator class, methods like multiply_numbers work behind the scenes. To see where the mathematical
+        equation is happening, you can refer to the following code being used by the abstract base class.
+    <div style="background-color: #cfc ; padding: 10px; border: 1px solid green;">
+        <code style="display:block; white-space:pre-wrap">
+            """This is the multiplication calculation that inherits the values from the calculations class"""
+            #This is called a namespace it is like files & folders.
+            #It looks like a folder & file path but it is a like a virtual representation
+
+            from calc.calculation import Calculation
+
+            #This is how you extend the Addition class with the Calculation
+            class Multiplication(Calculation):
+            """The addition class has one method to get the result of the calculation"""
+            def get_result(self):
+            """you need to use self to reference the data contained in the instance of the object"""
+            return self.value_a * self.value_b
+        </code></div>
+    <p>
+    </p>
+    <li><span><b>Inheritance</b></span> - Inheritance is a way of creating a new class for using details of an existing class without modifying it. The newly formed
+        class is a derived class (or child class). Similarly, the existing class is a base class (or parent class).</li>
+    <div style="background-color: #cfc ; padding: 10px; border: 1px solid green;">
+        <code style="display:block; white-space:pre-wrap">
+            """This is our calculation base class & abstract class"""
+            class Calculation: # pylint: disable=too-few-public-methods
+            """constructor & it is the 1st function called when an object of the class is instantiated"""
+            def __init__(self, value_a, value_b): # pylint: disable=too-few-public-methods
+            """class factory method"""
+            self.value_a = value_a
+            self.value_b = value_b
+            @classmethod
+            def create(cls, value_a, value_b):
+            """class method"""
+            return cls(value_a, value_b)
+        </code></div>
+
+    <li><span><b>Polymorphism</b></span> - Polymorphism is an ability (in OOP) to use a common interface for multiple forms (data types). Suppose, we need to
+        color a shape, there are multiple shape options (rectangle, square, circle). However we could use the same method to color any shape. This concept is called Polymorphism.</li>
+    <div style="background-color: #cfc ; padding: 10px; border: 1px solid green;">
+        <code style="display:block; white-space:pre-wrap">
+            """Calculation history class"""
+
+            from calc.calculations.addition import Addition
+            from calc.calculations.subtraction import Subtraction
+            from calc.calculations.multiplication import Multiplication
+            from calc.calculations.division import Division
+
+            class Calculations:
+            """This class works with the history of the calculator"""
+
+            history = []
+
+            @staticmethod
+            def get_results_of_first_calculation_added_to_history():
+            """ This is the get first result class"""
+            return Calculator.history[0].get_result()
+
+            @staticmethod
+            def get_history():
+            """ This is the get history class"""
+            return Calculator.history
+
+            @staticmethod
+            def clear_history():
+            """ This is the clear result class"""
+            Calculator.history.clear()
+            return True
+
+            @staticmethod
+            def history_count():
+            """ This is the history count class"""
+            return len(Calculator.history)
+
+            @staticmethod
+            def add_calculation_to_history(calculation):
+            """ This is the calculation history class"""
+            Calculator.history.append(calculation)
+            return True
+
+            @staticmethod
+            def get_results_of_last_calculation_added_to_history():
+            """-1 gets last item added to list"""
+            return Calculator.history[-1].get_result()
+
+            @staticmethod
+            #this is an example of a calling method
+            def add_number(value_a, value_b):
+            """ adds number to result"""
+            #create an addition object using the factory we created on the calculation class
+            addition = Addition.create(value_a, value_b)
+            Calculator.add_calculation_to_history(addition)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+
+            @staticmethod
+            #this is an example of a calling method
+            def subtract_number(value_a, value_b):
+            """ subtract number from result"""
+            # create a subtraction object using the factory we created on the calculation class
+            subtraction = Subtraction.create(value_a, value_b)
+            Calculator.add_calculation_to_history(subtraction)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+
+            @staticmethod
+            #this is an example of a calling method
+            def multiply_numbers(value_a, value_b):
+            """ multiply two numbers and store the result"""
+            # create a multiplication object using the factory we created on the calculation class
+            multiplication = Multiplication.create(value_a, value_b)
+            Calculator.add_calculation_to_history(multiplication)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+
+            @staticmethod
+            #this is an example of a calling method
+            def divide_numbers(value_a, value_b):
+            """ division two numbers and store the result"""
+            # create a division object using the factory we created on the calculation class
+            division = Division.create(value_a, value_b)
+            Calculator.add_calculation_to_history(division)
+            return Calculator.get_results_of_last_calculation_added_to_history()
+        </code></div>
+        An example of Polymorphism would be my Calculations class having a few methods passing different objects to the same method without any problems.
+</div>
+
+<!-- Footer -->
+<footer>
+    <p class="text-center"> <a class="footer-repo" href="https://github.com/LuisB3/calc2/tree/calc_part4_refactor" target="_blank" title="My Calc git repository">My Calc Git Repo | </a>
+        <a class="footer-report" href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fproject2web.eastus.azurecontainer.io%2Findex.html" target="_blank" title="W3C Validator report"> W3C Report | </a>
+        Luis Bastidas--IS601 &#169;
+    </p>
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Separation of Concerns</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="font-family: Impact; letter-spacing: 5px;">Separation of Concerns</h2>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink" role="button">
+                        Learn More
+                    </a>
+                    <div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+                        <a class="dropdown-item" href="article1.html">Pylint Tips & Tricks</a>
+                        <a class="dropdown-item" href="article2.html">AAA Tutorial</a>
+                        <a class="dropdown-item" href="article3.html">Principals of OOPs</a>
+                        <a class="dropdown-item" href="article4.html">Separation of Concerns</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="glossary.html">OOP Glossary <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <p>
+    <ul>
+        <h3>Separation of Concerns</h3>
+        <li><span><b>A key principle</b></span> of software development and architecture is the notion of separation of concerns.
+        At a low level, this principle is closely related to the Single Responsibility Principle of object-oriented programming.
+        The general idea is that one should avoid co-locating different concerns within the design or code.  For instance, if your application
+        includes business logic for identifying certain noteworthy items to display to the user, and your application formats such items in a certain way
+        to make them more noticeable, it would violate separation of concerns if both the logic for determining which items were noteworthy and the formatting
+        of these items were in the same place.  The design would be more maintainable, less tightly coupled, and less likely to violate the Don't Repeat Yourself
+        principle if the logic for determining which items needed formatting were located in a single location (with other business logic), and were exposed to the
+        user interface code responsible for formatting simply as a property.
+        <li><span><b>At an architectural level</b></span> separation of concerns is a key component of building layered applications.  In a traditional N-tier
+        application structure, layers might include data access, business logic, and user interface.  More modern N-tier application designs might include a core
+        domain model and separate infrastructure modules in addition to one or more front end services and/or user interfaces.  Web pages, to a greater or lesser degree,
+        separate concerns relating to structure, logic, and formatting through the use of HTML, JavaScript, and CSS.  At a lower level, the networking model used by the
+        Internet is broken into a series of layers each with specific concerns and responsibilities, and demonstrates how separation of concerns can be effectively applied.</li>
+        <li><span><b>In addition to separating logic </b></span> across programming layers, one can also separate concerns along application feature sets.  Applications
+        may be written to allow functionality to be added or removed in a modular fashion, and many commercial products support this functionality as a means of separating
+            features across product SKUs or to allow third parties to create plug-ins.</li>
+        <li><span><b>Separation of Concerns</b></span> tends to be a natural consequence of following the Don't Repeat Yourself principle, since of necessity abstractions
+        must be built to encapsulate concepts that would otherwise be repeated throughout the application.  As long as these abstractions are logically grouped and organized,
+            then Separation of Concerns should be achieved.</li>
+    </ul>
+    </p>
+    <img src="Images/separation.jpg" style="align-content: center; height: 400px; width: 400px">
+    <p>
+    <ul>
+    <li><span><b>Example:</b></span> my calculator exhibits the principle of Separation of Concerns because all classes have specific uses.
+        The four mathematical classes of Addition, Subtraction, Multiplication, and Division are set up to perform specific calculations.
+        <div style="background-color: #cfc ; padding: 10px; border: 1px solid green;">
+            <code style="display:block; white-space:pre-wrap">
+                """ This is the increment function"""
+                #1st import he addition namespace
+                from calc.additon import Addition
+                from calc.subtraction import Subtraction
+                from calc.multiplication import Multiplication
+                from calc.division import Division
+
+                class Calculator:
+                """ This is the Calculator class"""
+                history = []
+                @staticmethod
+                def get_results_of_first_calculation_added_to_history():
+                """ This is the get first result class"""
+                return Calculator.history[0].get_result()
+
+                @staticmethod
+                def get_history():
+                """ This is the get history class"""
+                return Calculator.history
+
+                @staticmethod
+                def clear_history():
+                """ This is the clear result class"""
+                Calculator.history.clear()
+                return True
+
+                @staticmethod
+                def history_count():
+                """ This is the history count class"""
+                return len(Calculator.history)
+
+                @staticmethod
+                def add_calculation_to_history(calculation):
+                """ This is the calculation history class"""
+                Calculator.history.append(calculation)
+                return True
+
+                @staticmethod
+                def get_results_of_last_calculation_added_to_history():
+                """-1 gets last item added to list"""
+                return Calculator.history[-1].get_result()
+
+                @staticmethod
+                #this is an example of a calling method
+                def add_number(value_a, value_b):
+                """ adds number to result"""
+                #create an addition object using the factory we created on the calculation class
+                addition = Addition.create(value_a, value_b)
+                Calculator.add_calculation_to_history(addition)
+                return Calculator.get_results_of_last_calculation_added_to_history()
+
+                @staticmethod
+                #this is an example of a calling method
+                def subtract_number(value_a, value_b):
+                """ subtract number from result"""
+                # create a subtraction object using the factory we created on the calculation class
+                subtraction = Subtraction.create(value_a, value_b)
+                Calculator.add_calculation_to_history(subtraction)
+                return Calculator.get_results_of_last_calculation_added_to_history()
+
+                @staticmethod
+                #this is an example of a calling method
+                def multiply_numbers(value_a, value_b):
+                """ multiply two numbers and store the result"""
+                # create a multiplication object using the factory we created on the calculation class
+                multiplication = Multiplication.create(value_a, value_b)
+                Calculator.add_calculation_to_history(multiplication)
+                return Calculator.get_results_of_last_calculation_added_to_history()
+
+                @staticmethod
+                #this is an example of a calling method
+                def divide_numbers(value_a, value_b):
+                """ division two numbers and store the result"""
+                # create a division object using the factory we created on the calculation class
+                division = Division.create(value_a, value_b)
+                Calculator.add_calculation_to_history(division)
+                return Calculator.get_results_of_last_calculation_added_to_history()
+            </code></div>
+        While I am using history to keep track of all calculated values stored, that history is not actually contained within the Calculator class.
+        Our Calculator class is focused solely the mathematical calculations. The history of our Calculator is a separate concern of the Calculations class.
+        The actual calculations happen here:
+        <div style="background-color: #cfc ; padding: 10px; border: 1px solid green;">
+            <code style="display:block; white-space:pre-wrap">
+                """This is our calculation base class & abstract class"""
+                class Calculation: # pylint: disable=too-few-public-methods
+                """constructor & it is the 1st function called when an object of the class is instantiated"""
+                def __init__(self, value_a, value_b): # pylint: disable=too-few-public-methods
+                """class factory method"""
+                self.value_a = value_a
+                self.value_b = value_b
+                @classmethod
+                def create(cls, value_a, value_b):
+                """class method"""
+                return cls(value_a, value_b)
+            </code></div>
+            As shown, I am following the best practices of programming while maintaining a Separation of Concerns for the Calculator program.
+    </ul>
+    </p>
+
+</div>
+</div>
+<!-- Footer -->
+<footer>
+        <p class="text-center"> <a class="footer-repo" href="https://github.com/LuisB3/calc2/tree/calc_part4_refactor" target="_blank" title="My Calc git repository">My Calc Git Repo | </a>
+        <a class="footer-report" href="https://validator.w3.org/nu/?doc=http%3A%2F%2Fproject2web.eastus.azurecontainer.io%2Findex.html" target="_blank" title="W3C Validator report"> W3C Report | </a>
+        Luis Bastidas--IS601 &#169;
+        </p>
+
+</footer>
+
+
+</body>
+</html>
